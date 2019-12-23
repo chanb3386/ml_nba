@@ -8,3 +8,5 @@ relative to the mean, game info, etc), TEAM MISC, recent opp record
 neural network inputs: evaluation of net ratings, player matchup advantage, team matchup advantage, home advantage, recent performance bias
 
 poisson for defensive/offensive play per minute of game time? (Pace, off rtg, def rtg, ppg, bpg...)
+
+prediction for player stats based on match up history? (+/-, p/a/r, team value)
