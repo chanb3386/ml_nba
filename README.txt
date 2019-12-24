@@ -1,6 +1,7 @@
 Brandon Chan
 
 To Do: update data function - updates data from web (?), neurtal network training, input data, prediction formula + user interaction
+final write up (conclusions, methodology, design, data inputs)
 
 network training: maybe need to create helper funcs to accquire/aggregate data
 
@@ -19,4 +20,3 @@ how to: save a model and use in a different file?
 all-star model (?): takes starters + bench as input
 training: more complex: how each player operated in each match up that can possibly appear on the field, need a way to show objective team benefit (+/-?)
 --- need better single game metric
-
