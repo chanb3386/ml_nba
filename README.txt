@@ -2,6 +2,18 @@ Brandon Chan
 
 To Do: update data function - updates data from web (?), neurtal network training, input data, prediction formula + user interaction
 final write up (conclusions, methodology, design, data inputs)
+loss function - for learning - (categorical_crossentropy works, look for better loss functions)
+activation function - used to propagate output of neuron forward
+cross validation (hold out)
+optimizer - used to minimize loss function (gradient descent?)
+
+want better optimier and cross validation
+may need to look into new loss func/activation func
+
+back prop: loss function, optimizer, metrics (accuracy - how right were you?)
+
+Testing: run the model over previous games and calculate the success? Maybe a better way of determining its success?
+
 
 network training: maybe need to create helper funcs to accquire/aggregate data
 
@@ -20,3 +32,5 @@ how to: save a model and use in a different file?
 all-star model (?): takes starters + bench as input
 training: more complex: how each player operated in each match up that can possibly appear on the field, need a way to show objective team benefit (+/-?)
 --- need better single game metric
+
+DATA SOURCES: Kaggle & Basketball-Reference
