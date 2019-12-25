@@ -7,6 +7,8 @@ activation function - used to propagate output of neuron forward
 cross validation (hold out)
 optimizer - used to minimize loss function (gradient descent?)
 
+
+
 want better optimier and cross validation
 may need to look into new loss func/activation func
 
