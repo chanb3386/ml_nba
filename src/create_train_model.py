@@ -138,6 +138,6 @@ model = keras.Sequential([
 ])
 model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
 model.fit(train_data, train_labels, epochs=5)
-# model.evaluate(test_data,test_labels)
+model.evaluate(test_data,test_labels)
 
 model.save("predict_nba.h5")

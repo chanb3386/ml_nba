@@ -1,0 +1,49 @@
+Blazers @ Jazz (12/26): .6876384 odds home win | BET*: HOME WIN RESULT: HOME WIN (1/1)
+Cavs @ Celtics (12/27) .6482361 odds home win | BET: HOME WIN RESULT: 
+Thunder @ Hornets (12/27) .5459862 odds home win | BET: AWAY WIN RESULT:
+
+
+
+
+
+
+
+Interpretations:
+According to Kevin Belhumeur from Bleacher Report, you can expect an average team during a 
+season to win 60% of their home games (P[HOMEWIN] = .6). Assume this statistic is true.
+If this is the case, then a team with greater than 60% odds to win a home indicates that
+the team has a statistical advantage over the other team, excluding home game advantage.
+
+ex:
+	Blazers @ Jazz P[HOMEWIN] = .6876384
+	The Jazz had a significantly higher probability than winning at home than average
+	against the blazers. This was reflected in the real game (Jazz lead by as much as 20)
+
+	Thunder @ Hornets P[HOMEWIN] = .5459862
+	The Hornets are expected to win (likely as a result of homefield advantage)
+	but their probability of winning at home against the Thunder is far below 
+	the league average.
+
+	Timberwolves @ Kings P[HOMEWIN] = .6209254
+	This indicates that its pretty close, and there may be no significant advantage.
+	This was reflected in the real game by a 1-point win by the Kings.
+
+	Highest vs. Lowest Net Rating (Bucks vs Hawks as of 12/27)
+	Bucks @ Hawks P[HOMEWIN] = .5437479
+	Hawks @ Bucks P[HOMEWIN] = .7025835
+
+	This doesn't look too bad, however it seems the model may over stress the importance
+	of home field advantage. Even though the Bucks hold the Hawks to far below the 
+	league average here, reasonably I would expect P[HOMEWIN] < .5 for this 
+	specific game. 
+
+Based on this, if P[HOMEWIN] > .6, it is a fair prediction to assume that the home team
+has a clear cut advantage over the away team
+
+If P[HOMEWIN] = .6, then the teams have equal advantage, with the exception of homefield
+
+If P[HOMEWIN] < .5, then the away team has a clear skill/scoring advantage over the home team
+
+Using .6 as the average for league home wins provides a clear indication of team advantage
+
+*bets are based on my interpretation, not just the output
