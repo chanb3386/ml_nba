@@ -81,6 +81,21 @@ data2018 = data2018.drop(columns=['Rk','G', 'MP'])
 dataOppStats2020 = pd.read_csv("../data/league-stats/opponent-stats.txt", index_col=1)
 dataOppStats2020 = dataOppStats2020.drop(columns=['Rk', 'G', 'MP'])
 
+#x,y = data_team_stat.shape
+
+# standardizing data
+data19_20["HomeWin"] = data19_20["PTS"] > data19_20["PTS.1"] # converts win/lose to a boolean for labels
+data19_20 = data19_20.drop(columns=["PTS", "PTS.1"])
+
+#w,z = data2014_2018.shape
+
+data2014_2018 = data2014_2018[data2014_2018["Home"] == 1]
+data2014_2018 = data2014_2018.drop(columns=['Home'])
+data2014_2018 = data2014_2018.rename(columns = {"Opponent" : "Visitor/Neutral",
+                                "WINorLOSS" : "HomeWin"})
+data2014_2018 = data2014_2018.drop(columns = data2014_2018.columns[3:])
+data2014_2018["HomeWin"] = data2014_2018["HomeWin"].map(BOOL_DICT)
+
 # Creating inputs to Neural Network
 d5 = data19_20.join(data_team_stat) # adds home team stats
 d6 = d5.join(data_team_stat, on='Visitor/Neutral',lsuffix='_home',rsuffix='_away') # adds away team dataOppStats2020
@@ -116,11 +131,13 @@ test_data = test_data.values
 
 # creating the model
 model = keras.Sequential([
-    keras.layers.Dense(col_t-1),
+    keras.layers.Input(col_t),
     keras.layers.Dense(256, activation='tanh'),
     keras.layers.Dense(128, activation='tanh'),
     keras.layers.Dense(2, activation='softmax')
 ])
 model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
 model.fit(train_data, train_labels, epochs=5)
-model.evaluate(test_data,test_labels)
+# model.evaluate(test_data,test_labels)
+
+model.save("predict_nba.h5")
