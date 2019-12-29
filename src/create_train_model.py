@@ -43,27 +43,26 @@ TEAM_DICT = {
 
 BOOL_DICT = {1 : True, 0 : False}
 
-
-# FOR LATER USE - 2014-2018 data
-data2014_2018 = pd.read_csv("../data/games/nba-games-results-2014-2018.csv",index_col=1)
-data2014_2018 = data2014_2018.drop(columns=['Unnamed: 0','Game'])
-data2014_2018['Home'] = pd.Categorical(data2014_2018['Home'])
-data2014_2018['Home'] = data2014_2018.Home.cat.codes
-data2014_2018['WINorLOSS'] = pd.Categorical(data2014_2018['WINorLOSS'])
-data2014_2018['WINorLOSS'] = data2014_2018.WINorLOSS.cat.codes
-data2014_2018.index = data2014_2018.index.map(TEAM_DICT)
-data2014_2018['Opponent'] = data2014_2018['Opponent'].map(TEAM_DICT)
-#
-
 # Extracting NBA game results
-data19_20 = pd.read_csv("../data/games/nba-games-2019-oct-nov-dec.txt", index_col=4)
-data19_20 = data19_20.drop(columns=['Start (ET)','Unnamed: 6','Unnamed: 7', 'Attend.', 'Notes'])
+games2015 = pd.read_csv("../data/games/nba-games-14-15.txt",index_col=4)
+games2015 = games2015.drop(columns=['Start (ET)','Unnamed: 6','Unnamed: 7', 'Attend.', 'Notes'])
+
+games2016 = pd.read_csv("../data/games/nba-games-15-16.txt",index_col=4)
+games2016 = games2016.drop(columns=['Start (ET)','Unnamed: 6','Unnamed: 7', 'Attend.', 'Notes'])
+
+games2017 = pd.read_csv("../data/games/nba-games-16-17.txt",index_col=4)
+games2017 = games2017.drop(columns=['Start (ET)','Unnamed: 6','Unnamed: 7', 'Attend.', 'Notes'])
+
+games2018 = pd.read_csv("../data/games/nba-games-17-18.txt",index_col=4)
+games2018 = games2018.drop(columns=['Start (ET)','Unnamed: 6','Unnamed: 7', 'Attend.', 'Notes'])
+
+games2019 = pd.read_csv("../data/games/nba-games-18-19.txt",index_col=4)
+games2019 = games2019.drop(columns=['Start (ET)','Unnamed: 6','Unnamed: 7', 'Attend.', 'Notes'])
+
+games2020 = pd.read_csv("../data/games/nba-games-2019-oct-nov-dec.txt", index_col=4)
+games2020 = games2020.drop(columns=['Start (ET)','Unnamed: 6','Unnamed: 7', 'Attend.', 'Notes'])
 
 # Extracting NBA team season averages
-data_team_stat = pd.read_csv("../data/league-stats/team-per-game.txt", index_col=1)
-data_team_stat = data_team_stat.drop(columns=['Rk', 'G', 'MP'])
-
-# FOR LATER USE
 data2015 = pd.read_csv("../data/league-stats/team-per-game-14-15.txt",index_col=1)
 data2015 = data2015.drop(columns=['Rk','G', 'MP'])
 
@@ -75,53 +74,142 @@ data2017 = data2017.drop(columns=['Rk','G', 'MP'])
 
 data2018 = pd.read_csv("../data/league-stats/team-per-game-17-18.txt",index_col=1)
 data2018 = data2018.drop(columns=['Rk','G', 'MP'])
-#
+
+data2019 = pd.read_csv("../data/league-stats/team-per-game-18-19.txt",index_col=1)
+data2019 = data2019.drop(columns=['Rk','G', 'MP'])
+
+data2020 = pd.read_csv("../data/league-stats/team-per-game.txt", index_col=1)
+data2020 = data2020.drop(columns=['Rk', 'G', 'MP'])
 
 # Extracting NBA Season opponent season averages
+dataOppStats2015 = pd.read_csv("../data/league-stats/opponent-stats-14-15.txt", index_col=1)
+dataOppStats2015 = dataOppStats2015.drop(columns=['Rk', 'G', 'MP'])
+
+dataOppStats2016 = pd.read_csv("../data/league-stats/opponent-stats-15-16.txt", index_col=1)
+dataOppStats2016 = dataOppStats2016.drop(columns=['Rk', 'G', 'MP'])
+
+dataOppStats2017 = pd.read_csv("../data/league-stats/opponent-stats-16-17.txt", index_col=1)
+dataOppStats2017 = dataOppStats2017.drop(columns=['Rk', 'G', 'MP'])
+
+dataOppStats2018 = pd.read_csv("../data/league-stats/opponent-stats-17-18.txt", index_col=1)
+dataOppStats2018 = dataOppStats2018.drop(columns=['Rk', 'G', 'MP'])
+
+dataOppStats2019 = pd.read_csv("../data/league-stats/opponent-stats-18-19.txt", index_col=1)
+dataOppStats2019 = dataOppStats2019.drop(columns=['Rk', 'G', 'MP'])
+
 dataOppStats2020 = pd.read_csv("../data/league-stats/opponent-stats.txt", index_col=1)
 dataOppStats2020 = dataOppStats2020.drop(columns=['Rk', 'G', 'MP'])
 
-#x,y = data_team_stat.shape
+nba_games = [games2015,games2016,games2017,games2018,games2019,games2020]
 
-# standardizing data
-data19_20["HomeWin"] = data19_20["PTS"] > data19_20["PTS.1"] # converts win/lose to a boolean for labels
-data19_20 = data19_20.drop(columns=["PTS", "PTS.1"])
+# setting the winner of the game
+for s in nba_games:
+    s["A_Win"] = s["PTS"] > s["PTS.1"]
 
-#w,z = data2014_2018.shape
+games2020 = games2020.drop(columns=["PTS","PTS.1"])
+games2015 = games2015.drop(columns=["PTS","PTS.1"])
+games2016 = games2016.drop(columns=["PTS","PTS.1"])
+games2017 = games2017.drop(columns=["PTS","PTS.1"])
+games2018 = games2018.drop(columns=["PTS","PTS.1"])
+games2019 = games2019.drop(columns=["PTS","PTS.1"])
 
-data2014_2018 = data2014_2018[data2014_2018["Home"] == 1]
-data2014_2018 = data2014_2018.drop(columns=['Home'])
-data2014_2018 = data2014_2018.rename(columns = {"Opponent" : "Visitor/Neutral",
-                                "WINorLOSS" : "HomeWin"})
-data2014_2018 = data2014_2018.drop(columns = data2014_2018.columns[3:])
-data2014_2018["HomeWin"] = data2014_2018["HomeWin"].map(BOOL_DICT)
+# all the games are listed as home games; creating some away games
+away_sets = [games2016,games2017,games2020]
+home_sets = [games2015,games2018,games2019]
+
+for s in home_sets:
+    s["Home"] = 1
+
+# switches the team sides
+for s in away_sets:
+    s["Home/Neutral"] = s.index
+    s.index = s["Visitor/Neutral"]
+    s["Home"] = 0
+    s["A_Win"] = ~s["A_Win"]
+
+# removing extraneous columns and ordering columns
+col = ["Date", "Home/Neutral", "A_Win", "Home"]
+games2016 = games2016.drop(columns=["Visitor/Neutral"])
+games2016 = games2016.reindex(columns=col)
+games2017 = games2017.drop(columns=["Visitor/Neutral"])
+games2017 = games2017.reindex(columns=col)
+games2020 = games2020.drop(columns=["Visitor/Neutral"])
+games2020 = games2020.reindex(columns=col)
 
 # Creating inputs to Neural Network
-d5 = data19_20.join(data_team_stat) # adds home team stats
-d6 = d5.join(data_team_stat, on='Visitor/Neutral',lsuffix='_home',rsuffix='_away') # adds away team dataOppStats2020
-d7 = d6.join(dataOppStats2020) # adds home opponent season averages
-game_data = d7.join(dataOppStats2020, on='Visitor/Neutral',lsuffix='_homeOpp',rsuffix='_awayOpp') # adds away opp season averages
-game_data = game_data.drop(columns=['Date'])
 
-# randomizing rows so test, train samples from larger sample of teams
+# adding team stats and opponent stats to each game
+d5 = games2020.join(data2020,lsuffix="_d3", rsuffix="_d4")
+d6 = d5.join(data2020, on='Home/Neutral', lsuffix="_A",rsuffix="_B")
+d7 = d6.join(dataOppStats2020)
+d8 = d7.join(dataOppStats2020, on='Home/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+
+d5 = games2016.join(data2016,lsuffix="_d3",rsuffix="_d4")
+d6 = d5.join(data2016, on='Home/Neutral', lsuffix="_A",rsuffix="_B")
+d7 = d6.join(dataOppStats2016)
+d9 = d7.join(dataOppStats2016, on='Home/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+
+d5 = games2015.join(data2015,lsuffix="_d3",rsuffix="_d4")
+d6 = d5.join(data2015, on='Visitor/Neutral', lsuffix="_A",rsuffix="_B")
+d7 = d6.join(dataOppStats2015)
+d10 = d7.join(dataOppStats2015, on='Visitor/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+
+d5 = games2017.join(data2017,lsuffix="_d3",rsuffix="_d4")
+d6 = d5.join(data2017, on='Home/Neutral', lsuffix="_A",rsuffix="_B")
+d7 = d6.join(dataOppStats2017)
+d11 = d7.join(dataOppStats2017, on='Home/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+
+d5 = games2018.join(data2018,lsuffix="_d3",rsuffix="_d4")
+d6 = d5.join(data2018, on='Visitor/Neutral', lsuffix="_A",rsuffix="_B")
+d7 = d6.join(dataOppStats2018)
+d12 = d7.join(dataOppStats2018, on='Visitor/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+
+d5 = games2019.join(data2019,lsuffix="_d3",rsuffix="_d4")
+d6 = d5.join(data2019, on='Visitor/Neutral', lsuffix="_A",rsuffix="_B")
+d7 = d6.join(dataOppStats2019)
+d13 = d7.join(dataOppStats2019, on='Visitor/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+
+check = d8.columns
+game_data = pd.concat([d8,d9,d10,d11,d12,d13],sort = True)
+game_data = game_data.reindex(columns=check)
+game_data = game_data.drop(columns=["Home/Neutral","Date"])
+
+# randomizing row order
 row,col=game_data.shape
 game_data = game_data.sample(frac=1) # randomizing rows
+
+# splitting into training and testing samples
 split = int(row * .2)
 train_data = game_data.iloc[0:split] # 20% of total data pool
 test_data = game_data.iloc[split:row]
 
 # getting training labels and cleaning training data
-train_labels = train_data["HomeWin"]
+train_labels = train_data["A_Win"]
 train_labels = train_labels.to_numpy(dtype=bool)
-train_data = train_data.drop(columns=["HomeWin"])
+train_data = train_data.drop(columns=["A_Win"])
 
 # test labels and cleaning
-test_labels = test_data["HomeWin"]
+test_labels = test_data["A_Win"]
 test_labels = test_labels.to_numpy(dtype=bool)
-test_data = test_data.drop(columns=["HomeWin"])
+test_data = test_data.drop(columns=["A_Win"])
 
-test_data = test_data.drop(columns=['Visitor/Neutral'])
-train_data = train_data.drop(columns=['Visitor/Neutral'])
+# saves the data and labels into txt logs
+test_file = open("data_logs/test_data.txt", "w")
+train_file = open("data_logs/train_data.txt", "w")
+
+test_file.write(test_data.to_csv(index=True))
+np.savetxt('data_logs/test_labels.txt', test_labels)
+train_file.write(train_data.to_csv(index=True))
+np.savetxt('data_logs/train_labels.txt', train_labels)
+
+# standardizing data
+x,y = train_data.shape
+w,z = test_data.shape
+
+for i in range(z):
+    test_data.iloc[:,i] = test_data.iloc[:,i] / test_data.iloc[:,i].max()
+for i in range(y):
+    train_data.iloc[:,i] = train_data.iloc[:,i] / train_data.iloc[:,i].max()
 
 row_t, col_t = train_data.shape
 
@@ -132,12 +220,39 @@ test_data = test_data.values
 # creating the model
 model = keras.Sequential([
     keras.layers.Input(col_t),
-    keras.layers.Dense(256, activation='tanh'),
-    keras.layers.Dense(128, activation='tanh'),
+    keras.layers.Dense(64, activation='tanh'),
+    keras.layers.Dense(64, activation='tanh'),
     keras.layers.Dense(2, activation='softmax')
 ])
 model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
 model.fit(train_data, train_labels, epochs=5)
 model.evaluate(test_data,test_labels)
 
-model.save("predict_nba.h5")
+# how many home wins predicted over test data
+predict = model.predict(test_data)
+count = 0
+for i in range(len(predict)):
+    if(predict[i][0] > .5):
+        count += 1
+print(count)
+
+np.savetxt('data_logs/test_predict.txt', predict)
+results = open('data_logs/results.txt', "w")
+
+# writing which games were predicted incorrectly/correctly
+wrong = 0
+correct = 0
+for i in range(len(predict)):
+    a = np.argmax(predict[0])
+    if a == test_labels[i]:
+        results.write("WRONG\n")
+        wrong += 1
+    else:
+        results.write("CORRECT\n")
+        correct += 1
+
+res = str(correct) + " CORRECT | " + str(wrong) + " WRONG"
+results.write(res)
+
+
+model.save("test_model.h5")

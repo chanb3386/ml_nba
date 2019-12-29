@@ -17,6 +17,6 @@ def getNeuralInputs(home,away):
     home_opp = dataOppStats2020.loc[home].values
     away_opp = dataOppStats2020.loc[away].values
 
-    inputs = [[*home_stats,*away_stats,*home_opp,*away_opp]]
+    inputs = [[1,*home_stats,*away_stats,*home_opp,*away_opp]]
 
     return  inputs
