@@ -13,6 +13,8 @@ home = input("Enter home team: ")
 away = input("Enter away team: ")
 
 inputs = opendata.getNeuralInputs(home,away)
+#np.savetxt("prediction_results/pred_inputs.txt", inputs)
+
 
 predict = model.predict(inputs)
 print("%HOME WIN: " + str(predict[0][0]))

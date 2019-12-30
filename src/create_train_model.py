@@ -4,8 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-LABELS = [True, False]
-# True = home win, False = away win
 LABEL_COLUMN = "WINorLOSS"
 
 TEAM_DICT = {
@@ -118,6 +116,7 @@ away_sets = [games2016,games2017,games2020]
 home_sets = [games2015,games2018,games2019]
 
 for s in home_sets:
+    s["A_Win"] = ~s["A_Win"]
     s["Home"] = 1
 
 # switches the team sides
@@ -125,7 +124,7 @@ for s in away_sets:
     s["Home/Neutral"] = s.index
     s.index = s["Visitor/Neutral"]
     s["Home"] = 0
-    s["A_Win"] = ~s["A_Win"]
+    #s["A_Win"] = ~s["A_Win"]
 
 # removing extraneous columns and ordering columns
 col = ["Date", "Home/Neutral", "A_Win", "Home"]
@@ -169,14 +168,19 @@ d6 = d5.join(data2019, on='Visitor/Neutral', lsuffix="_A",rsuffix="_B")
 d7 = d6.join(dataOppStats2019)
 d13 = d7.join(dataOppStats2019, on='Visitor/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
 
+gamesFile = open("data_logs/nba_games.txt","w")
 check = d8.columns
 game_data = pd.concat([d8,d9,d10,d11,d12,d13],sort = True)
 game_data = game_data.reindex(columns=check)
-game_data = game_data.drop(columns=["Home/Neutral","Date"])
 
 # randomizing row order
 row,col=game_data.shape
 game_data = game_data.sample(frac=1) # randomizing rows
+
+# writing to the data log
+game_data = game_data.drop(columns=["Home/Neutral"])
+gamesFile.write(game_data.to_csv(index=True))
+game_data = game_data.drop(columns=["Date"])
 
 # splitting into training and testing samples
 split = int(row * .2)
@@ -184,14 +188,16 @@ train_data = game_data.iloc[0:split] # 20% of total data pool
 test_data = game_data.iloc[split:row]
 
 # getting training labels and cleaning training data
-train_labels = train_data["A_Win"]
+train_labels = ~train_data["A_Win"]
 train_labels = train_labels.to_numpy(dtype=bool)
 train_data = train_data.drop(columns=["A_Win"])
 
 # test labels and cleaning
-test_labels = test_data["A_Win"]
+test_labels = ~test_data["A_Win"]
 test_labels = test_labels.to_numpy(dtype=bool)
 test_data = test_data.drop(columns=["A_Win"])
+
+# LABEL NOTES: 0 Reflects A team win, 1 reflects B team
 
 # saves the data and labels into txt logs
 test_file = open("data_logs/test_data.txt", "w")
@@ -220,8 +226,8 @@ test_data = test_data.values
 # creating the model
 model = keras.Sequential([
     keras.layers.Input(col_t),
-    keras.layers.Dense(64, activation='tanh'),
-    keras.layers.Dense(64, activation='tanh'),
+    keras.layers.Dense(100, activation='tanh'),
+    #keras.layers.Dense(100, activation='tanh'),
     keras.layers.Dense(2, activation='softmax')
 ])
 model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
@@ -237,22 +243,23 @@ for i in range(len(predict)):
 print(count)
 
 np.savetxt('data_logs/test_predict.txt', predict)
-results = open('data_logs/results.txt', "w")
 
-# writing which games were predicted incorrectly/correctly
-wrong = 0
-correct = 0
-for i in range(len(predict)):
-    a = np.argmax(predict[0])
-    if a == test_labels[i]:
-        results.write("WRONG\n")
-        wrong += 1
-    else:
-        results.write("CORRECT\n")
-        correct += 1
+# results = open('data_logs/results.txt', "w")
+#
+# # writing which games were predicted incorrectly/correctly
+# wrong = 0
+# correct = 0
+# for i in range(len(predict)):
+#     a = np.argmax(predict[0])
+#     if a == test_labels[i]:
+#         results.write("WRONG\n")
+#         wrong += 1
+#     else:
+#         results.write("CORRECT\n")
+#         correct += 1
+#
+# res = str(correct) + " CORRECT | " + str(wrong) + " WRONG"
+# results.write(res)
 
-res = str(correct) + " CORRECT | " + str(wrong) + " WRONG"
-results.write(res)
 
-
-model.save("test_model.h5")
+model.save("model/test_model.h5")

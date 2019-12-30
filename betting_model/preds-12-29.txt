@@ -1,0 +1,36 @@
+12/29
+
+Enter home team: Toronto Raptors
+Enter away team: Oklahoma City Thunder
+%HOME WIN: 0.43696123
+%AWAY WIN: 0.56303877
+
+BET: AWAY WIN | RESULT: AWAY WIN
+
+Enter home team: Memphis Grizzlies
+Enter away team: Charlotte Hornets
+%HOME WIN: 0.68719053
+%AWAY WIN: 0.31280944
+
+BET: HOME WIN | RESULT: HOME WIN
+
+Enter home team: New Orleans Pelicans
+Enter away team: Houston Rockets
+%HOME WIN: 0.44400296
+%AWAY WIN: 0.555997
+
+BET: AWAY WIN | RESULT: HOME WIN (injuries)
+
+Enter home team: Denver Nuggets
+Enter away team: Sacramento Kings
+%HOME WIN: 0.509958
+%AWAY WIN: 0.490042
+
+BET: HOME WIN | RESULT: HOME WIN
+
+Enter home team: Los Angeles Lakers
+Enter away team: Dallas Mavericks
+%HOME WIN: 0.48690495
+%AWAY WIN: 0.5130951
+
+BET: AWAY WIN: | RESULT: 

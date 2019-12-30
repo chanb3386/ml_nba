@@ -9,3 +9,5 @@ TODO:
 add player ratings + more inputs
 auto-update
 recency in predictions
+new cross val
+verify data_logs + work on view functions

@@ -20,3 +20,6 @@ def getNeuralInputs(home,away):
     inputs = [[1,*home_stats,*away_stats,*home_opp,*away_opp]]
 
     return  inputs
+
+#def getRecentInputs(home,away,inputs):
+#    return
