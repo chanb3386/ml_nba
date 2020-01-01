@@ -8,6 +8,18 @@ import opendata
 # user app to interact with the model
 model = keras.models.load_model("model/test_model.h5")
 
+# Function to convert
+def listToString(s):
+    # initialize an empty string
+    str1 = ""
+
+    # traverse in the string
+    for ele in s:
+        str1 += str(ele)
+
+    # return string
+    return str1
+
 def predictNetwork():
     home_away = input("Enter [HOME | AWAY]: ")
 
@@ -22,7 +34,10 @@ def predictNetwork():
         home = input("Enter home team: ")
 
     inputs = opendata.getNeuralInputs(home,away,home_away)
-    #np.savetxt("prediction_results/pred_inputs.txt", inputs)
+    preds = open("data_logs/preds.txt","w")
+    preds.write(home)
+    preds.write(away)
+    preds.write(listToString(inputs[0]))
 
 
     predict = model.predict(inputs)
@@ -33,8 +48,10 @@ if __name__ == "__main__":
     while(True):
         predictNetwork()
         stop = input("Go again? Y/N: ")
-        if stop == "N":
+        if stop.lower() == "n":
             print("FINISHING...\n")
             break
-        else:
+        elif stop.lower() == "y":
             continue
+        else:
+            break
