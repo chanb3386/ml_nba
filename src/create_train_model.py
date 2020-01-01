@@ -115,6 +115,7 @@ games2019 = games2019.drop(columns=["PTS","PTS.1"])
 away_sets = [games2016,games2017,games2020]
 home_sets = [games2015,games2018,games2019]
 
+# setting home flags, flipping win column for home games
 for s in home_sets:
     s["A_Win"] = ~s["A_Win"]
     s["Home"] = 1
@@ -124,7 +125,6 @@ for s in away_sets:
     s["Home/Neutral"] = s.index
     s.index = s["Visitor/Neutral"]
     s["Home"] = 0
-    #s["A_Win"] = ~s["A_Win"]
 
 # removing extraneous columns and ordering columns
 col = ["Date", "Home/Neutral", "A_Win", "Home"]
@@ -137,7 +137,7 @@ games2020 = games2020.reindex(columns=col)
 
 # Creating inputs to Neural Network
 
-# adding team stats and opponent stats to each game
+# adding team stats and opponent stats to each game for each team
 d5 = games2020.join(data2020,lsuffix="_d3", rsuffix="_d4")
 d6 = d5.join(data2020, on='Home/Neutral', lsuffix="_A",rsuffix="_B")
 d7 = d6.join(dataOppStats2020)
@@ -188,6 +188,7 @@ train_data = game_data.iloc[0:split] # 20% of total data pool
 test_data = game_data.iloc[split:row]
 
 # getting training labels and cleaning training data
+# flipping A_Win to represent 0 = A team win
 train_labels = ~train_data["A_Win"]
 train_labels = train_labels.to_numpy(dtype=bool)
 train_data = train_data.drop(columns=["A_Win"])

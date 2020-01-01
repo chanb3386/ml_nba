@@ -11,14 +11,15 @@ dataOppStats2020 = pd.read_csv("../data/league-stats/opponent-stats.txt", index_
 dataOppStats2020 = dataOppStats2020.drop(columns=['Rk', 'G', 'MP'])
 
 # a helper function that pre-processes data for input to the neural network
-def getNeuralInputs(home,away):
+def getNeuralInputs(home,away,home_away):
     home_stats = team_data.loc[home].values
     away_stats = team_data.loc[away].values
     home_opp = dataOppStats2020.loc[home].values
     away_opp = dataOppStats2020.loc[away].values
-
-    inputs = [[1,*home_stats,*away_stats,*home_opp,*away_opp]]
-
+    if home_away == "HOME":
+        inputs = [[1,*home_stats,*away_stats,*home_opp,*away_opp]]
+    elif home_away == "AWAY":
+        inputs = [[0,*away_stats,*home_stats,*away_opp,*home_opp]]
     return  inputs
 
 #def getRecentInputs(home,away,inputs):

@@ -1,0 +1,55 @@
+Enter home team: Charlotte Hornets (+8.5)
+Enter away team: Boston Celtics (-8.5)
+%HOME WIN: 0.3256019
+%AWAY WIN: 0.6743981
+
+BET: AWAY WIN | RESULT: 
+
+Enter home team: Indiana Pacers (+1)
+Enter away team: Philadelphia 76ers (-1)
+%HOME WIN: 0.49271035
+%AWAY WIN: 0.5072896
+
+BET: AWAY WIN | RESULT: 
+
+Enter home team: Sacramento Kings (+7)
+Enter away team: Los Angeles Clippers (-7)
+%HOME WIN: 0.32399964
+%AWAY WIN: 0.67600036
+
+BET: AWAY WIN | RESULT:
+
+Enter home team: Toronto Raptors (-9.5)
+Enter away team: Cleveland Cavaliers (+9.5)
+%HOME WIN: 0.48019844
+%AWAY WIN: 0.51980156
+
+BET: AWAY WIN | RESULT: 
+
+Enter home team: Houston Rockets (-4.5)
+Enter away team: Denver Nuggets (+4.5)
+%HOME WIN: 0.39706048
+%AWAY WIN: 0.6029395
+
+BET: AWAY WIN | RESULT: 
+
+Enter home team: San Antonio Spurs (-10)
+Enter away team: Golden State Warriors (+10)
+%HOME WIN: 0.70408356
+%AWAY WIN: 0.29591647
+
+BET: HOME WIN | RESULT: 
+
+Enter home team: Oklahoma City Thunder (+3.5)
+Enter away team: Dallas Mavericks (-3.5)
+%HOME WIN: 0.448535
+%AWAY WIN: 0.551465
+
+BET: AWAY WIN | RESULT: 
+
+
+*Theoretical BETS*
+$5 Dallas Mavericks beat spread (+1, close away game, favored to win) lost
+$5 Cavaliers (close game, +9.5 spread, toronto: lost 3/4 last games, siakam out)lost
+*REAL BETS*
+$5 Denver Nuggets (close spread, but heavily favored)lost

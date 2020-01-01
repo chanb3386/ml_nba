@@ -1,0 +1,43 @@
+Enter home team: Orlando Magic
+Enter away team: Atlanta Hawks
+%HOME WIN: 0.48470157
+%AWAY WIN: 0.5152984
+
+BET: AWAY WIN | RESULT: AWAY WIN (+12 ATL Spread)
+
+Enter home team: Washington Wizards
+Enter away team: Miami Heat
+%HOME WIN: 0.42855996
+%AWAY WIN: 0.5714401
+
+BET: AWAY WIN | RESULT: HOME WIN
+
+Enter home team: Chicago Bulls
+Enter away team: Milwaukee Bucks
+%HOME WIN: 0.39745042
+%AWAY WIN: 0.6025496
+
+BET: AWAY WIN | RESULT: AWAY WIN
+
+Enter home team: Minnesota Timberwolves
+Enter away team: Brooklyn Nets
+%HOME WIN: 0.49093962
+%AWAY WIN: 0.5090603
+
+BET: AWAY WIN | RESULT: HOME WIN
+
+Enter home team: Utah Jazz
+Enter away team: Detroit Pistons
+%HOME WIN: 0.55602306
+%AWAY WIN: 0.44397685
+
+BET: HOME WIN | RESULT: HOME WIN
+
+Enter home team: Portland Trail Blazers
+Enter away team: Phoenix Suns
+%HOME WIN: 0.5938226
+%AWAY WIN: 0.4061773
+
+BET: HOME WIN | RESULT: AWAY WIN
+
+3/6

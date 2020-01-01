@@ -33,4 +33,6 @@ Enter away team: Dallas Mavericks
 %HOME WIN: 0.48690495
 %AWAY WIN: 0.5130951
 
-BET: AWAY WIN: | RESULT: 
+BET: AWAY WIN: | RESULT: HOME WIN
+
+3/5

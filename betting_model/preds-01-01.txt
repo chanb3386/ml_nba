@@ -1,0 +1,36 @@
+Enter home team: Washington Wizards
+Enter away team: Orlando Magic
+%HOME WIN: 0.5441827
+%AWAY WIN: 0.45581734
+
+BET: HOME WIN | RESULT:
+
+Enter home team: New York Knicks (+3.5)
+Enter away team: Portland Trail Blazers
+%HOME WIN: 0.5049556
+%AWAY WIN: 0.49504438
+
+BET: HOME WIN | RESULT: 
+
+Enter home team: Milwaukee Bucks
+Enter away team: Minnesota Timberwolves
+%HOME WIN: 0.5297123
+%AWAY WIN: 0.47028768
+
+BET: HOME WIN | RESULT: 
+
+Enter home team: Los Angeles Lakers (-11)
+Enter away team: Phoenix Suns
+%HOME WIN: 0.4292488
+%AWAY WIN: 0.5707512
+
+? 
+
+*Theoretical Bets*
+
+$5 Suns beat spread (advantage in match up apparently, huge spread)
+$5 Knicks (super close game, knicks positive spread)
+$5 Wizards
+
+*Real Bets*
+$5 TWolves beat spread (+18)
