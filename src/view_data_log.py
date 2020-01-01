@@ -24,19 +24,24 @@ def viewTestData():
     return testgames
 
 def viewPredData():
-    preddata = open("prediction_results/pred_inputs.txt", "r")
+    preddata = open("data_logs/preds.txt", "r+")
+    print(preddata.read())
+    return
 
-input = input("Enter an option: [ALL, TRAIN, TEST, PRED, END]: ")
-if input == "ALL":
-    csv = viewAllGames()
-    print(csv)
-elif input == "TRAIN":
-    csv = viewTrainData()
-    print(csv)
-elif input == "TEST":
-    csv = viewTestData()
-    print(csv)
-elif input == "END":
-    print("Ending\n")
-else:
-    print("Not Valid Input\n")
+if __name__ == "__main__":
+    input = input("Enter an option: [ALL, TRAIN, TEST, PRED, END]: ")
+    if input == "ALL":
+        csv = viewAllGames()
+        print(csv)
+    elif input == "TRAIN":
+        csv = viewTrainData()
+        print(csv)
+    elif input == "TEST":
+        csv = viewTestData()
+        print(csv)
+    elif input == "PRED":
+        viewPredData()
+    elif input == "END":
+        print("Ending...\n")
+    else:
+        print("Not Valid Input... FINISHING\n")
