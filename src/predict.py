@@ -16,6 +16,7 @@ def listToString(s):
     # traverse in the string
     for ele in s:
         str1 += str(ele)
+        str1 += " "
 
     # return string
     return str1
@@ -36,7 +37,9 @@ def predictNetwork():
     inputs = opendata.getNeuralInputs(home,away,home_away)
     preds = open("data_logs/preds.txt","w")
     preds.write(home)
+    preds.write("\n")
     preds.write(away)
+    preds.write("\n")
     preds.write(listToString(inputs[0]))
 
 
