@@ -4,6 +4,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+
+# Script to gather NBA data to train and test a neural network
+# 1a. data-gathering
+# 1b. Pre-processing
+# 2. data manipulation, creating train / test samples
+# 3. standardizing data, training Network
+# 4. Testing model
+
 LABEL_COLUMN = "WINorLOSS"
 
 TEAM_DICT = {
@@ -41,7 +49,7 @@ TEAM_DICT = {
 
 BOOL_DICT = {1 : True, 0 : False}
 
-# Extracting NBA game results
+# PRE-PROCESSING
 games2015 = pd.read_csv("../data/games/nba-games-14-15.txt",index_col=4)
 games2015 = games2015.drop(columns=['Start (ET)','Unnamed: 6','Unnamed: 7', 'Attend.', 'Notes'])
 
@@ -231,7 +239,7 @@ model = keras.Sequential([
     #keras.layers.Dense(100, activation='tanh'),
     keras.layers.Dense(2, activation='softmax')
 ])
-model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer="sgd", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
 model.fit(train_data, train_labels, epochs=5)
 model.evaluate(test_data,test_labels)
 

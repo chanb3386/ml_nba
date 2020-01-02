@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import opendata
 
-# user app to interact with the model
+# user app to interact with the model and receive predictions
+
 model = keras.models.load_model("model/test_model.h5")
 
 # Function to convert
@@ -23,7 +24,7 @@ def listToString(s):
 
 def predictNetwork():
     home_away = input("Enter [HOME | AWAY]: ")
-    
+
     #i.e "Milwaukee Bucks, Dallas Mavericks, ..."
     if home_away == "HOME":
         home = input("Enter home team: ")
