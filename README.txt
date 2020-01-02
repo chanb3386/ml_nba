@@ -11,3 +11,7 @@ auto-update
 recency in predictions
 new cross val
 verify data_logs + work on view functions
+team ranking
+
+
+Readings + cross val/opt/loss func/layers

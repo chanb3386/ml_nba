@@ -3,21 +3,21 @@ Enter away team: Orlando Magic
 %HOME WIN: 0.5441827
 %AWAY WIN: 0.45581734
 
-BET: HOME WIN | RESULT:
+BET: HOME WIN | RESULT: AWAY WIN
 
 Enter home team: New York Knicks (+3.5)
 Enter away team: Portland Trail Blazers
 %HOME WIN: 0.5049556
 %AWAY WIN: 0.49504438
 
-BET: HOME WIN | RESULT: 
+BET: HOME WIN | RESULT: HOME WIN
 
 Enter home team: Milwaukee Bucks
 Enter away team: Minnesota Timberwolves
 %HOME WIN: 0.5297123
 %AWAY WIN: 0.47028768
 
-BET: HOME WIN | RESULT: 
+BET: HOME WIN | RESULT: HOME WIN
 
 Enter home team: Los Angeles Lakers (-11)
 Enter away team: Phoenix Suns
@@ -27,4 +27,4 @@ Enter away team: Phoenix Suns
 ? 
 
 *Real Bets*
-$5 TWolves beat spread (+18)
+$5 TWolves beat spread (+18) WON

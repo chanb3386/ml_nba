@@ -60,3 +60,6 @@ Enter away team: Detroit Pistons
 %AWAY WIN: 0.3918616
 
 BET: HOME WIN | RESULT: 
+
+*REAL BET*
+$7.50 Grizzlies beat spread (+4)

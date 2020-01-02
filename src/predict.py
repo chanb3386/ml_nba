@@ -32,6 +32,8 @@ def predictNetwork():
     elif home_away == "AWAY":
         away = input("Enter away team: ")
         home = input("Enter home team: ")
+    else:
+        raise NameError('Wrong inputs')
 
     inputs = opendata.getNeuralInputs(home,away,home_away)
     preds = open("data_logs/preds.txt","w")
@@ -48,7 +50,14 @@ def predictNetwork():
 
 if __name__ == "__main__":
     while(True):
-        predictNetwork()
+        try:
+            predictNetwork()
+        except KeyError:
+            print("Wrong teams")
+            continue
+        except NameError:
+            print("Wrong inputs")
+            continue
         stop = input("Go again? Y/N: ")
         if stop.lower() == "n":
             print("FINISHING...\n")
