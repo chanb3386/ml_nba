@@ -26,11 +26,5 @@ Enter away team: Phoenix Suns
 
 ? 
 
-*Theoretical Bets*
-
-$5 Suns beat spread (advantage in match up apparently, huge spread)
-$5 Knicks (super close game, knicks positive spread)
-$5 Wizards
-
 *Real Bets*
 $5 TWolves beat spread (+18)

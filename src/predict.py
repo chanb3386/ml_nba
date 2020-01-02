@@ -23,9 +23,7 @@ def listToString(s):
 
 def predictNetwork():
     home_away = input("Enter [HOME | AWAY]: ")
-
-
-
+    
     #i.e "Milwaukee Bucks, Dallas Mavericks, ..."
     if home_away == "HOME":
         home = input("Enter home team: ")

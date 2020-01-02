@@ -47,9 +47,5 @@ Enter away team: Dallas Mavericks (-3.5)
 
 BET: AWAY WIN | RESULT: 
 
-
-*Theoretical BETS*
-$5 Dallas Mavericks beat spread (+1, close away game, favored to win) lost
-$5 Cavaliers (close game, +9.5 spread, toronto: lost 3/4 last games, siakam out)lost
 *REAL BETS*
 $5 Denver Nuggets (close spread, but heavily favored)lost
