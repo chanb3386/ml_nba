@@ -19,7 +19,7 @@ TEAM_DICT = {
              "MIA" : "Miami Heat",
              "BOS" : "Boston Celtics",
              "TOR" : "Toronto Raptors",
-             "PHI" : "Philidelphia 76ers",
+             "PHI" : "Philadelphia 76ers",
              "IND" : "Indiana Pacers",
              "BRK" : "Brooklyn Nets",
              "ORL" : "Orlando Magic",

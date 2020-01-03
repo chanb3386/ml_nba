@@ -22,6 +22,7 @@ def listToString(s):
     # return string
     return str1
 
+# takes user input to predict a game
 def predictNetwork():
     home_away = input("Enter [HOME | AWAY]: ")
 
@@ -47,6 +48,12 @@ def predictNetwork():
     predict = model.predict(inputs)
     print("%HOME WIN: " + str(predict[0][0]))
     print("%AWAY WIN: " + str(predict[0][1]))
+
+# used in rank_teams.py
+def predictNetwork(home,away):
+    inputs = opendata.getNeuralInputs(home,away,"HOME")
+    predict = model.predict(inputs)
+    return predict
 
 if __name__ == "__main__":
     while(True):

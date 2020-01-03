@@ -7,11 +7,11 @@ This is a neural network created to predict NBA games. It is trained and tested 
 
 TODO:
 add player ratings + more inputs
-auto-update
-recency in predictions
+auto-update (selenium)
+recency in predictions (selenium)
 new cross val
 verify data_logs + work on view functions
-team ranking
+team ranking (WIP)
 
 
 Readings + cross val/opt/loss func/layers

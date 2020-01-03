@@ -3,63 +3,65 @@ Enter away team: Charlotte Hornets
 %HOME WIN: 0.4367539
 %AWAY WIN: 0.563246
 
-BET: AWAY WIN | RESULT: 
+BET: AWAY WIN | RESULT: AWAY WIN
 
 Enter home team: Indiana Pacers
 Enter away team: Denver Nuggets
 %HOME WIN: 0.5399148
 %AWAY WIN: 0.4600852
 
-BET: HOME WIN | RESULT:
+BET: HOME WIN | RESULT: AWAY WIN
 
 Enter home team: Miami Heat
 Enter away team: Toronto Raptors
 %HOME WIN: 0.55263054
 %AWAY WIN: 0.44736946
 
-BET: HOME WIN | RESULT: 
+BET: HOME WIN | RESULT: HOME WIN
 
 Enter home team: Chicago Bulls
 Enter away team: Utah Jazz
 %HOME WIN: 0.48479453
 %AWAY WIN: 0.51520544
 
-BET: AWAY WIN | RESULT: 
+BET: AWAY WIN | RESULT: AWAY WIN
 
 Enter home team: Minnesota Timberwolves
 Enter away team: Golden State Warriors
 %HOME WIN: 0.51030695
 %AWAY WIN: 0.4896931
 
-BET: HOME WIN | RESULT: 
+BET: HOME WIN | RESULT: HOME WIN
 
 Enter home team: Dallas Mavericks
 Enter away team: Brooklyn Nets
 %HOME WIN: 0.3396451
 %AWAY WIN: 0.6603549
 
-?
+RESULT: HOME WIN
 
 Enter home team: San Antonio Spurs
 Enter away team: Oklahoma City Thunder
 %HOME WIN: 0.598858
 %AWAY WIN: 0.40114194
 
-BET: HOME WIN | RESULT: 
+BET: HOME WIN | RESULT: AWAY WIN
 
 Enter home team: Sacramento Kings
 Enter away team: Memphis Grizzlies
 %HOME WIN: 0.46772385
 %AWAY WIN: 0.53227615
 
-BET: AWAY WIN | RESULT:
+BET: AWAY WIN | RESULT: HOME WIN
 
 Enter home team: Los Angeles Clippers
 Enter away team: Detroit Pistons
 %HOME WIN: 0.60813844
 %AWAY WIN: 0.3918616
 
-BET: HOME WIN | RESULT: 
+BET: HOME WIN | RESULT: HOME WIN
 
 *REAL BET*
-$7.50 Grizzlies beat spread (+4)
+$7.50 Grizzlies beat spread (+4) LOST 128-123
+
+5/8
