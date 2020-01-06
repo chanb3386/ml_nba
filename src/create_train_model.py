@@ -108,22 +108,22 @@ dataOppStats2020 = dataOppStats2020.drop(columns=['Rk', 'G', 'MP'])
 
 # Getting NBA "Misc Stats": see league stats for columns
 misc2015 = pd.read_csv("../data/league-stats/misc-team-14-15.txt", index_col=1)
-misc2015 = misc2015.drop(columns=['Rk', 'Arena'])
+misc2015 = misc2015.drop(columns=['Rk', 'Arena','Attend.', 'Attend./G'])
 
 misc2016 = pd.read_csv("../data/league-stats/misc-team-15-16.txt", index_col=1)
-misc2016 = misc2016.drop(columns=['Rk', 'Arena'])
+misc2016 = misc2016.drop(columns=['Rk', 'Arena','Attend.', 'Attend./G'])
 
 misc2017 = pd.read_csv("../data/league-stats/misc-team-16-17.txt", index_col=1)
-misc2017 = misc2017.drop(columns=['Rk', 'Arena'])
+misc2017 = misc2017.drop(columns=['Rk', 'Arena','Attend.', 'Attend./G'])
 
 misc2018 = pd.read_csv("../data/league-stats/misc-team-17-18.txt", index_col=1)
-misc2018 = misc2018.drop(columns=['Rk', 'Arena'])
+misc2018 = misc2018.drop(columns=['Rk', 'Arena','Attend.', 'Attend./G'])
 
 misc2019 = pd.read_csv("../data/league-stats/misc-team-18-19.txt", index_col=1)
-misc2019 = misc2019.drop(columns=['Rk', 'Arena'])
+misc2019 = misc2019.drop(columns=['Rk', 'Arena','Attend.', 'Attend./G'])
 
 misc2020 = pd.read_csv("../data/league-stats/misc-team.txt", index_col=1)
-misc2020 = misc2020.drop(columns=['Rk', 'Arena'])
+misc2020 = misc2020.drop(columns=['Rk', 'Arena','Attend.', 'Attend./G'])
 
 nba_games = [games2015,games2016,games2017,games2018,games2019,games2020]
 
@@ -209,7 +209,7 @@ d14 = d13.join(misc2019)
 stat2019 = d14.join(misc2019, on='Visitor/Neutral', lsuffix='_AMisc', rsuffix='_BMisc')
 
 gamesFile = open("data_logs/nba_games.txt","w")
-check = d8.columns
+check = stat2020.columns
 game_data = pd.concat([stat2020,stat2016,stat2015,stat2017,stat2018,stat2019],sort = True)
 game_data = game_data.reindex(columns=check)
 
