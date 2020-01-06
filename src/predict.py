@@ -50,7 +50,7 @@ def predictNetwork():
     print("%AWAY WIN: " + str(predict[0][1]))
 
 # used in rank_teams.py
-def predictNetwork(home,away):
+def predictNetwork2(home,away):
     inputs = opendata.getNeuralInputs(home,away,"HOME")
     predict = model.predict(inputs)
     return predict

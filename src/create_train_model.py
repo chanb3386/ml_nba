@@ -106,6 +106,25 @@ dataOppStats2019 = dataOppStats2019.drop(columns=['Rk', 'G', 'MP'])
 dataOppStats2020 = pd.read_csv("../data/league-stats/opponent-stats.txt", index_col=1)
 dataOppStats2020 = dataOppStats2020.drop(columns=['Rk', 'G', 'MP'])
 
+# Getting NBA "Misc Stats": see league stats for columns
+misc2015 = pd.read_csv("../data/league-stats/misc-team-14-15.txt", index_col=1)
+misc2015 = misc2015.drop(columns=['Rk', 'Arena'])
+
+misc2016 = pd.read_csv("../data/league-stats/misc-team-15-16.txt", index_col=1)
+misc2016 = misc2016.drop(columns=['Rk', 'Arena'])
+
+misc2017 = pd.read_csv("../data/league-stats/misc-team-16-17.txt", index_col=1)
+misc2017 = misc2017.drop(columns=['Rk', 'Arena'])
+
+misc2018 = pd.read_csv("../data/league-stats/misc-team-17-18.txt", index_col=1)
+misc2018 = misc2018.drop(columns=['Rk', 'Arena'])
+
+misc2019 = pd.read_csv("../data/league-stats/misc-team-18-19.txt", index_col=1)
+misc2019 = misc2019.drop(columns=['Rk', 'Arena'])
+
+misc2020 = pd.read_csv("../data/league-stats/misc-team.txt", index_col=1)
+misc2020 = misc2020.drop(columns=['Rk', 'Arena'])
+
 nba_games = [games2015,games2016,games2017,games2018,games2019,games2020]
 
 # setting the winner of the game
@@ -150,35 +169,48 @@ d5 = games2020.join(data2020,lsuffix="_d3", rsuffix="_d4")
 d6 = d5.join(data2020, on='Home/Neutral', lsuffix="_A",rsuffix="_B")
 d7 = d6.join(dataOppStats2020)
 d8 = d7.join(dataOppStats2020, on='Home/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+d9 = d8.join(misc2020)
+stat2020 = d9.join(misc2020, on='Home/Neutral', lsuffix='_AMisc', rsuffix='_BMisc')
+
 
 d5 = games2016.join(data2016,lsuffix="_d3",rsuffix="_d4")
 d6 = d5.join(data2016, on='Home/Neutral', lsuffix="_A",rsuffix="_B")
 d7 = d6.join(dataOppStats2016)
 d9 = d7.join(dataOppStats2016, on='Home/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+d10 = d9.join(misc2016)
+stat2016 = d10.join(misc2016, on='Home/Neutral', lsuffix='_AMisc', rsuffix='_BMisc')
 
 d5 = games2015.join(data2015,lsuffix="_d3",rsuffix="_d4")
 d6 = d5.join(data2015, on='Visitor/Neutral', lsuffix="_A",rsuffix="_B")
 d7 = d6.join(dataOppStats2015)
 d10 = d7.join(dataOppStats2015, on='Visitor/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+d11 = d10.join(misc2015)
+stat2015 = d11.join(misc2015, on='Visitor/Neutral', lsuffix='_AMisc', rsuffix='_BMisc')
 
 d5 = games2017.join(data2017,lsuffix="_d3",rsuffix="_d4")
 d6 = d5.join(data2017, on='Home/Neutral', lsuffix="_A",rsuffix="_B")
 d7 = d6.join(dataOppStats2017)
 d11 = d7.join(dataOppStats2017, on='Home/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+d12 = d11.join(misc2017)
+stat2017 = d12.join(misc2017, on='Home/Neutral', lsuffix='_AMisc', rsuffix='_BMisc')
 
 d5 = games2018.join(data2018,lsuffix="_d3",rsuffix="_d4")
 d6 = d5.join(data2018, on='Visitor/Neutral', lsuffix="_A",rsuffix="_B")
 d7 = d6.join(dataOppStats2018)
 d12 = d7.join(dataOppStats2018, on='Visitor/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+d13 = d12.join(misc2018)
+stat2018 = d13.join(misc2018, on='Visitor/Neutral', lsuffix='_AMisc', rsuffix='_BMisc')
 
 d5 = games2019.join(data2019,lsuffix="_d3",rsuffix="_d4")
 d6 = d5.join(data2019, on='Visitor/Neutral', lsuffix="_A",rsuffix="_B")
 d7 = d6.join(dataOppStats2019)
 d13 = d7.join(dataOppStats2019, on='Visitor/Neutral', lsuffix='_AOppStat', rsuffix='_BOppStats')
+d14 = d13.join(misc2019)
+stat2019 = d14.join(misc2019, on='Visitor/Neutral', lsuffix='_AMisc', rsuffix='_BMisc')
 
 gamesFile = open("data_logs/nba_games.txt","w")
 check = d8.columns
-game_data = pd.concat([d8,d9,d10,d11,d12,d13],sort = True)
+game_data = pd.concat([stat2020,stat2016,stat2015,stat2017,stat2018,stat2019],sort = True)
 game_data = game_data.reindex(columns=check)
 
 # randomizing row order
@@ -235,12 +267,12 @@ test_data = test_data.values
 # creating the model
 model = keras.Sequential([
     keras.layers.Input(col_t),
-    keras.layers.Dense(100, activation='tanh'),
-    #keras.layers.Dense(100, activation='tanh'),
+    keras.layers.Dense(64, activation='tanh'),
+    keras.layers.Dense(64, activation='tanh'),
     keras.layers.Dense(2, activation='softmax')
 ])
-model.compile(optimizer="sgd", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
-model.fit(train_data, train_labels, epochs=5)
+model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+model.fit(train_data, train_labels, epochs=1)
 model.evaluate(test_data,test_labels)
 
 # how many home wins predicted over test data
