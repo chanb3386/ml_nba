@@ -21,7 +21,7 @@ def listToString(s):
     return str1
 
 # takes user input to predict a game
-def predictNetwork():
+def predictNetwork(model):
     model = keras.models.load_model("model/test_model.h5")
     home_away = input("Enter [HOME | AWAY]: ")
 
@@ -54,7 +54,7 @@ def predictNetwork():
         print("%HOME WIN: " + str(predict[0][1]))
 
 # used in rank_teams.py
-def predictNetwork2(home,away):
+def predictNetwork2(home,away,model):
     inputs = opendata.getNeuralInputs(home,away,"HOME")
     predict = model.predict(inputs)
     return predict

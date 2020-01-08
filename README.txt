@@ -7,7 +7,6 @@ This is a neural network created to predict NBA games. It is trained and tested 
 
 TODO:
 *auto-update (selenium)
-*create main
 
 ***Readings + cross val/opt/loss func/layers
 ***team ranking (WIP)

@@ -7,6 +7,10 @@ import predict
 import create_train_model as ctm
 import view_data_log as vdl
 import update_data
+import rank_teams
+import update_data
+
+model = keras.models.load_model("model/test_model.h5")
 
 def main():
     a = input("Enter an option [TRAIN, PREDICT, VIEWLOG, RANK, UPDATE]: ")
@@ -17,7 +21,7 @@ def main():
     elif check == 'predict':
         while(True):
             try:
-                predict.predictNetwork()
+                predict.predictNetwork(model)
             except KeyError:
                 print("Wrong teams")
                 continue
@@ -33,24 +37,24 @@ def main():
             else:
                 break
     elif check == 'viewlog':
-        input1 = input("Enter an option: [ALL, TRAIN, TEST, PRED, END]: ")
-        if input1 == "ALL":
+        input1 = input("Enter an option: [ALL, TRAIN, TEST, PRED, END]: ").lower()
+        if input1 == "all":
             csv = vdl.viewAllGames()
             print(csv)
-        elif input1 == "TRAIN":
+        elif input1 == "train":
             csv = vdl.viewTrainData()
             print(csv)
-        elif input1 == "TEST":
+        elif input1 == "test":
             csv = vdl.viewTestData()
             print(csv)
-        elif input1 == "PRED":
+        elif input1 == "pred":
             vdl.viewPredData()
-        elif input1 == "END":
+        elif input1 == "end":
             print("Ending...\n")
         else:
             print("Not Valid Input... FINISHING\n")
     elif check == 'rank':
-        rank_teams.rankTeams()
+        rank_teams.rankTeams(model)
     else:
         print("Incorrect Input")
     return
@@ -61,4 +65,5 @@ if __name__ == '__main__':
         if input2 == 'y':
             main()
         else:
+            print("GOODBYE\n\n")
             break
