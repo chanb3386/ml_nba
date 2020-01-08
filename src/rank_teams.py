@@ -31,19 +31,29 @@ def rankTeams():
                      "Oklahoma City Thunder":0,"Portland Trail Blazers":0,"San Antonio Spurs":0,"Sacramento Kings":0,"Phoenix Suns":0,"Memphis Grizzlies":0,
                      "Minnesota Timberwolves":0,"New Orleans Pelicans":0,"Golden State Warriors":0}
 
+        count = 0
         # matching teams up
         for i in range(len(homeTeams)):
             for j in range(len(awayTeams)):
                 if homeTeams[i] != awayTeams[j]:
                     res = predict.predictNetwork2(homeTeams[i], awayTeams[j])
-                    winner = np.argmax(res[0])
+                    if(res[0][0] > .53):
+                        winner = 0
+                    elif(res[0][0] < .47):
+                        winner = 1
+                    else:
+                        winner = 2
+
+                    #winner = np.argmax(res[0])
                     if winner == 0:
                         wins[homeTeams[i]] += 1
-                    else:
+                    elif winner == 1:
                         wins[awayTeams[j]] += 1
+                    else:
+                        print("between: " + str(count))
+                        count+=1
 
         # printing results
         for k,v in wins.items():
             print(k+" : "+str(v))
-
-rankTeams()
+        print("between count: " + str(count))

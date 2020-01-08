@@ -21,10 +21,12 @@ def updateData():
 
     actions = ActionChains(driver)
 
-    teamStats = driver.find_element_by_tag_name('h2') # need to find element better
-    actions.move_to_element(teamStats)
-    actions.perform()
-    time.sleep(2)
+    teamStats = driver.find_elements_by_tag_name('h2') # need to find element better
+    for x in teamStats:
+        actions.move_to_element(x)
+        time.sleep(2)
+        actions.perform()
+
     #teamButton = driver.find_element_by_link_text('Share & More')
     #actions.move_to_element(teamButton)
     #print(teamStats)
@@ -42,5 +44,3 @@ def getRecentStats(home,away):
     games2020 = games2020.drop(columns=['Start (ET)','Unnamed: 6','Unnamed: 7', 'Attend.', 'Notes'])
     print(games2020)
     return
-
-updateData()

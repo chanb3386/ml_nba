@@ -13,7 +13,7 @@ def viewAllGames():
 def viewTrainData():
     # training games and labels
     traingames = pd.read_csv("data_logs/train_data.txt")
-    trainlabels = pd.read_csv("data_logs/train_labels.txt"names=['labels'])
+    trainlabels = pd.read_csv("data_logs/train_labels.txt",names=['labels'])
     traingames = traingames.join(trainlabels)
     return traingames
 

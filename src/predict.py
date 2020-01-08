@@ -7,8 +7,6 @@ import opendata
 
 # user app to interact with the model and receive predictions
 
-model = keras.models.load_model("model/test_model.h5")
-
 # Function to convert
 def listToString(s):
     # initialize an empty string
@@ -24,13 +22,14 @@ def listToString(s):
 
 # takes user input to predict a game
 def predictNetwork():
+    model = keras.models.load_model("model/test_model.h5")
     home_away = input("Enter [HOME | AWAY]: ")
 
     #i.e "Milwaukee Bucks, Dallas Mavericks, ..."
-    if home_away == "HOME":
+    if home_away.lower() == "home":
         home = input("Enter home team: ")
         away = input("Enter away team: ")
-    elif home_away == "AWAY":
+    elif home_away.lower() == "away":
         away = input("Enter away team: ")
         home = input("Enter home team: ")
     else:
@@ -46,30 +45,16 @@ def predictNetwork():
 
 
     predict = model.predict(inputs)
-    print("%HOME WIN: " + str(predict[0][0]))
-    print("%AWAY WIN: " + str(predict[0][1]))
+
+    if home_away.lower() == "home":
+        print("%HOME WIN: " + str(predict[0][0]))
+        print("%AWAY WIN: " + str(predict[0][1]))
+    else:
+        print("%AWAY WIN: " + str(predict[0][0]))
+        print("%HOME WIN: " + str(predict[0][1]))
 
 # used in rank_teams.py
 def predictNetwork2(home,away):
     inputs = opendata.getNeuralInputs(home,away,"HOME")
     predict = model.predict(inputs)
     return predict
-
-if __name__ == "__main__":
-    while(True):
-        try:
-            predictNetwork()
-        except KeyError:
-            print("Wrong teams")
-            continue
-        except NameError:
-            print("Wrong inputs")
-            continue
-        stop = input("Go again? Y/N: ")
-        if stop.lower() == "n":
-            print("FINISHING...\n")
-            break
-        elif stop.lower() == "y":
-            continue
-        else:
-            break
