@@ -224,7 +224,7 @@ def createModel():
     game_data = game_data.drop(columns=["Date"])
 
     # splitting into training and testing samples
-    split = int(row * .3)
+    split = int(row * .2)
     train_data = game_data.iloc[0:split] # 20% of total data pool
     test_data = game_data.iloc[split:row]
 
@@ -268,12 +268,14 @@ def createModel():
     # creating the model
     model = keras.Sequential([
         keras.layers.Input(col_t),
-        keras.layers.Dense(64, activation='tanh'),
+        keras.layers.Dense(128, activation='tanh'),
         keras.layers.Dense(64, activation='tanh'),
         keras.layers.Dense(2, activation='softmax')
     ])
+
+    epochs = input('enter epochs: ')
     model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
-    model.fit(train_data, train_labels, epochs=10)
+    model.fit(train_data, train_labels, epochs=int(epochs))
     model.evaluate(test_data,test_labels)
 
     # how many home wins predicted over test data
