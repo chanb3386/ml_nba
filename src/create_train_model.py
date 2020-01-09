@@ -123,7 +123,7 @@ def createModel():
     misc2019 = pd.read_csv("../data/league-stats/misc-team-18-19.txt", index_col=1)
     misc2019 = misc2019.drop(columns=['Rk', 'Arena','Attend.', 'Attend./G'])
 
-    misc2020 = pd.read_csv("../data/league-stats/misc-team.txt", index_col=1)
+    misc2020 = pd.read_csv("../data/league-stats/misc-team.txt", index_col=1,skiprows=[0])
     misc2020 = misc2020.drop(columns=['Rk', 'Arena','Attend.', 'Attend./G'])
 
     nba_games = [games2015,games2016,games2017,games2018,games2019,games2020]

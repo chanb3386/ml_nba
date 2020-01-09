@@ -22,11 +22,10 @@ def listToString(s):
 
 # takes user input to predict a game
 def predictNetwork(model):
-    model = keras.models.load_model("model/test_model.h5")
     home_away = input("Enter [HOME | AWAY]: ")
 
-    #i.e "Milwaukee Bucks, Dallas Mavericks, ..."
     if home_away.lower() == "home":
+        # i.e "Milwaukee Bucks, Dallas Mavericks, ..."
         home = input("Enter home team: ")
         away = input("Enter away team: ")
     elif home_away.lower() == "away":

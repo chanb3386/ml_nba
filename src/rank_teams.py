@@ -10,8 +10,6 @@ import predict
 # each team plays each other team twice, once at home, once away
 # ranks teams on win % (58 games each team)
 def rankTeams(model):
-        model = keras.models.load_model("model/test_model.h5")
-
         homeTeams = ["Milwaukee Bucks","Miami Heat","Boston Celtics","Toronto Raptors","Philadelphia 76ers","Indiana Pacers","Brooklyn Nets",
                      "Orlando Magic","Charlotte Hornets","Chicago Bulls","Detroit Pistons","Washington Wizards","Cleveland Cavaliers","New York Knicks",
                      "Atlanta Hawks","Los Angeles Lakers","Denver Nuggets","Houston Rockets","Los Angeles Clippers","Dallas Mavericks","Utah Jazz",

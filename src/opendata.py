@@ -10,7 +10,7 @@ team_data = team_data.drop(columns=['Rk', 'G', 'MP'])
 dataOppStats2020 = pd.read_csv("../data/league-stats/opponent-stats.txt", index_col=1)
 dataOppStats2020 = dataOppStats2020.drop(columns=['Rk', 'G', 'MP'])
 
-misc2020 = pd.read_csv("../data/league-stats/misc-team.txt", index_col=1)
+misc2020 = pd.read_csv("../data/league-stats/misc-team.txt", index_col=1,skiprows=[0])
 misc2020 = misc2020.drop(columns=['Rk', 'Arena','Attend.', 'Attend./G'])
 
 # a helper function that pre-processes data for input to the neural network
