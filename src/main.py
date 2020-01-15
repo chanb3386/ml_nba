@@ -16,6 +16,8 @@ def main():
         if check == 'train':
             print("Training...")
             ctm.createModel()
+            print('Loading model...')
+            model = keras.models.load_model("model/test_model.h5")
         elif check == 'predict':
             while(True):
                 try:

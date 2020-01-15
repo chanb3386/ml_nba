@@ -224,7 +224,7 @@ def createModel():
     game_data = game_data.drop(columns=["Date"])
 
     # splitting into training and testing samples
-    split = int(row * .2)
+    split = int(row * .25)
     train_data = game_data.iloc[0:split] # 20% of total data pool
     test_data = game_data.iloc[split:row]
 
@@ -268,8 +268,8 @@ def createModel():
     # creating the model
     model = keras.Sequential([
         keras.layers.Input(col_t),
-        keras.layers.Dense(128, activation='tanh'),
         keras.layers.Dense(64, activation='tanh'),
+        keras.layers.Dense(16, activation='tanh'),
         keras.layers.Dense(2, activation='softmax')
     ])
 
