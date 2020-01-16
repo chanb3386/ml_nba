@@ -30,6 +30,8 @@ def rankTeams(model):
                      "Minnesota Timberwolves":0,"New Orleans Pelicans":0,"Golden State Warriors":0}
 
         count = 0
+        log = open('data_logs/games_sim.txt', 'w')
+
         # matching teams up
         for i in range(len(homeTeams)):
             for j in range(len(awayTeams)):
@@ -41,6 +43,8 @@ def rankTeams(model):
                         winner = 1
                     else:
                         winner = 2
+
+                    log.write(homeTeams[i] + ' vs ' + awayTeams[j] + ' RESULT: ' + opendata.listToString(res) + '\n')
 
                     #winner = np.argmax(res[0])
                     if winner == 0:

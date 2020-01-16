@@ -7,9 +7,7 @@ import update_data
 import rank_teams
 import update_data
 
-model = keras.models.load_model("model/test_model.h5")
-
-def main():
+def main(model):
     while(True):
         a = input("Enter an option [TRAIN, PREDICT, VIEWLOG, RANK, UPDATE, END]: ")
         check = a.lower()
@@ -65,4 +63,5 @@ def main():
     return
 
 if __name__ == '__main__':
-    main()
+    model = keras.models.load_model("model/test_model.h5")
+    main(model)

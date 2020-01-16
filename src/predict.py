@@ -7,19 +7,6 @@ import opendata
 
 # user app to interact with the model and receive predictions
 
-# Function to convert
-def listToString(s):
-    # initialize an empty string
-    str1 = ""
-
-    # traverse in the string
-    for ele in s:
-        str1 += str(ele)
-        str1 += " "
-
-    # return string
-    return str1
-
 # takes user input to predict a game
 def predictNetwork(model):
     home_away = input("Enter [HOME | AWAY]: ")
@@ -40,7 +27,7 @@ def predictNetwork(model):
     preds.write("\n")
     preds.write(away)
     preds.write("\n")
-    preds.write(listToString(inputs[0]))
+    preds.write(opendata.listToString(inputs[0]))
 
 
     predict = model.predict(inputs)

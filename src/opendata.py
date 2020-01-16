@@ -28,5 +28,18 @@ def getNeuralInputs(home,away,home_away):
         inputs = [[0,*away_stats,*home_stats,*away_opp,*home_opp,*away_misc,*home_misc]]
     return  inputs
 
+# Function to convert list to string
+def listToString(s):
+    # initialize an empty string
+    str1 = ""
+
+    # traverse in the string
+    for ele in s:
+        str1 += str(ele)
+        str1 += " "
+
+    # return string
+    return str1
+
 #def getRecentInputs(home,away,inputs):
 #    return
