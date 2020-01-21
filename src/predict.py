@@ -21,6 +21,11 @@ def predictNetwork(model):
     else:
         raise NameError('Wrong inputs')
 
+    try:
+        type = input("Enter a model [GL, DIFF]: ").lower()
+    except:
+        print("Wrong Input")
+
     inputs = opendata.getNeuralInputs(home,away,home_away)
     preds = open("data_logs/preds.txt","w")
     preds.write(home)
@@ -32,12 +37,18 @@ def predictNetwork(model):
 
     predict = model.predict(inputs)
 
-    if home_away.lower() == "home":
-        print("%HOME WIN: " + str(predict[0][0]))
-        print("%AWAY WIN: " + str(predict[0][1]))
+    if type == 'gl':
+        if home_away.lower() == "home":
+            print("%HOME WIN: " + str(predict[0][0]))
+            print("%AWAY WIN: " + str(predict[0][1]))
+        else:
+            print("%AWAY WIN: " + str(predict[0][0]))
+            print("%HOME WIN: " + str(predict[0][1]))
+    elif type == 'diff':
+        print(predict)
+        print(str(predict[0]))
     else:
-        print("%AWAY WIN: " + str(predict[0][0]))
-        print("%HOME WIN: " + str(predict[0][1]))
+        raise NameError('Wrong Inputs')
 
 # used in rank_teams.py
 def predictNetwork2(home,away,model):

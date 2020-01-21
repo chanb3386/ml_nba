@@ -12,10 +12,20 @@ def main(model):
         a = input("Enter an option [TRAIN, PREDICT, VIEWLOG, RANK, UPDATE, END]: ")
         check = a.lower()
         if check == 'train':
-            print("Training...")
-            ctm.createModel()
-            print('Loading model...')
-            model = keras.models.load_model("model/test_model.h5")
+            whichModel = input("Enter an option [GAMELINE, DIFF]: ").lower()
+            if whichModel == 'gameline':
+                print("Training gameline model...")
+                ctm.createModel()
+                print('Loading model...')
+                model = keras.models.load_model("model/test_model.h5")
+            elif whichModel == 'diff':
+                print("Training diff model...")
+                ctm.createDifferentialModel()
+                print('Loading model...')
+                model = keras.models.load_model("model/test_model.h5")
+            else:
+                print("wrong inputs")
+                continue
         elif check == 'predict':
             while(True):
                 try:
