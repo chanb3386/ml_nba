@@ -1,51 +1,5 @@
-import tensorflow as tf
-from tensorflow import keras
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import opendata
-
-TEAM_DICT = {
-             "MIL" : "Milwaukee Bucks",
-             "MIA" : "Miami Heat",
-             "BOS" : "Boston Celtics",
-             "TOR" : "Toronto Raptors",
-             "PHI" : "Philadelphia 76ers",
-             "IND" : "Indiana Pacers",
-             "BRK" : "Brooklyn Nets",
-             "ORL" : "Orlando Magic",
-             "CHO" : "Charlotte Hornets",
-             "CHI" : "Chicago Bulls",
-             "DET" : "Detroit Pistons",
-             "WAS" : "Washington Wizards",
-             "CLE" : "Cleveland Cavaliers",
-             "NYK" : "New York Knicks",
-             "ATL" : "Atlanta Hawks",
-             "LAL" : "Los Angeles Lakers",
-             "DEN" : "Denver Nuggets",
-             "HOU" : "Houston Rockets",
-             "LAC" : "Los Angeles Clippers",
-             "DAL" : "Dallas Mavericks",
-             "UTA" : "Utah Jazz",
-             "OKC" : "Oklahoma City Thunder",
-             "POR" : "Portland Trail Blazers",
-             "SAS" : "San Antonio Spurs",
-             "SAC" : "Sacramento Kings",
-             "PHO" : "Phoenix Suns",
-             "MEM" : "Memphis Grizzlies",
-             "MIN" : "Minnesota Timberwolves",
-             "NOP" : "New Orleans Pelicans",
-             "GSW" : "Golden State Warriors"
-            }
-
-# Script to gather NBA data to train and test a neural network
-# 1a. data-gathering
-# 1b. Pre-processing
-# 2. data manipulation, creating train / test samples
-# 3. standardizing data, training Network
-# 4. Testing model
-
-def createModel():
+#creates model to predict point differential of an NBA game
+def createDifferentialModel():
 
     # PRE-PROCESSING
     games2015 = pd.read_csv("../data/games/nba-games-14-15.txt",index_col=4)
@@ -126,9 +80,8 @@ def createModel():
     nba_games = [games2015,games2016,games2017,games2018,games2019,games2020]
 
     # setting the winner of the game
-    # sets value "True" to A team win - changes later
     for s in nba_games:
-        s["A_Win"] = s["PTS"] > s["PTS.1"]
+        s["DIFF"] = s["PTS"] - s["PTS.1"]
 
     games2020 = games2020.drop(columns=["PTS","PTS.1"])
     games2015 = games2015.drop(columns=["PTS","PTS.1"])
@@ -143,7 +96,6 @@ def createModel():
 
     # setting home flags, flipping win column for home games
     for s in home_sets:
-        s["A_Win"] = ~s["A_Win"]
         s["Home"] = 1
 
     # switches the team sides
@@ -153,7 +105,7 @@ def createModel():
         s["Home"] = 0
 
     # removing extraneous columns and ordering columns
-    col = ["Date", "Home/Neutral", "A_Win", "Home"]
+    col = ["Date", "Home/Neutral", "DIFF", "Home"]
     games2016 = games2016.drop(columns=["Visitor/Neutral"])
     games2016 = games2016.reindex(columns=col)
     games2017 = games2017.drop(columns=["Visitor/Neutral"])
@@ -212,6 +164,11 @@ def createModel():
     game_data = pd.concat([stat2020,stat2015,stat2016,stat2017,stat2018,stat2019],sort = True)
     game_data = game_data.reindex(columns=check)
 
+    gamesFile = open("data_logs/nba_games.txt","w")
+    check = stat2020.columns
+    game_data = pd.concat([stat2020,stat2015,stat2016,stat2017,stat2018,stat2019],sort = True)
+    game_data = game_data.reindex(columns=check)
+
     # randomizing row order
     row,col=game_data.shape
     game_data = game_data.sample(frac=1) # randomizing rows
@@ -222,27 +179,19 @@ def createModel():
     game_data = game_data.drop(columns=["Date"])
 
     # splitting into training and testing samples
-    holdout = int(input("Enter a percent to for holdout: "))
-    holdout = holdout / 100
-
-    split = int(row * holdout)
-    if holdout >= 1 or holdout <=0:
-        print("Holdout must be below 100 and above 0")
-        raise ValueError
-
+    split = int(row * .25)
     train_data = game_data.iloc[0:split] # 20% of total data pool
     test_data = game_data.iloc[split:row]
 
     # getting training labels and cleaning training data
-    # flipping A_Win to represent 0 = A team win
-    train_labels = ~train_data["A_Win"]
-    train_labels = train_labels.to_numpy(dtype=bool)
-    train_data = train_data.drop(columns=["A_Win"])
+    train_labels = train_data["DIFF"]
+    train_labels = train_labels.to_numpy()
+    train_data = train_data.drop(columns=["DIFF"])
 
     # test labels and cleaning
-    test_labels = ~test_data["A_Win"]
-    test_labels = test_labels.to_numpy(dtype=bool)
-    test_data = test_data.drop(columns=["A_Win"])
+    test_labels = test_data["DIFF"]
+    test_labels = test_labels.to_numpy()
+    test_data = test_data.drop(columns=["DIFF"])
 
     # LABEL NOTES: 0 Reflects A team win, 1 reflects B team
 
@@ -271,26 +220,17 @@ def createModel():
     test_data = test_data.values
 
     # creating the model
-    print("CREATE YOUR MODEL: ")
-
-    hiddenNum = int(input("Enter the number of hidden layers: "))
-    hiddenActivation = input("Enter an activation function for hidden layers: ")
-    hiddenSize = int(input("Enter the size of each hidden layer: "))
-    outputActivation = input("Enter the output activation function: ")
-
+    hLayers = input('enter hidden layer size: ')
+    hLayers = int(hLayers)
     model = keras.Sequential([
         keras.layers.Input(col_t),
+        keras.layers.Dense(hLayers, activation='relu'),
+        keras.layers.Dense(hLayers, activation='relu'),
+        keras.layers.Dense(1, activation='linear')
     ])
 
-    for i in range(hiddenNum):
-        model.add(keras.layers.Dense(hiddenSize, activation=hiddenActivation))
-
-    model.add(keras.layers.Dense(2,outputActivation))
-
-    optimizer = input("Enter a Keras optimzer: ")
-
     epochs = input('enter epochs: ')
-    model.compile(optimizer=optimizer, loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+    model.compile(optimizer="Nadam", loss='mean_squared_error')
     model.fit(train_data, train_labels, epochs=int(epochs))
     model.evaluate(test_data,test_labels)
 
@@ -298,28 +238,14 @@ def createModel():
     predict = model.predict(test_data)
     count = 0
     for i in range(len(predict)):
-        if(predict[i][0] > .5):
-            count += 1
-    print(count)
+        if predict[i] < 0:
+            if predict[i] > test_labels[i]:
+                count+=1
+        elif predict[i] > 0:
+            if predict[i] < test_labels[i]:
+                count+=1
+    print(count/len(predict))
 
     np.savetxt('data_logs/test_predict.txt', predict)
-
-    # results = open('data_logs/results.txt', "w")
-    #
-    # # writing which games were predicted incorrectly/correctly
-    # wrong = 0
-    # correct = 0
-    # for i in range(len(predict)):
-    #     a = np.argmax(predict[0])
-    #     if a == test_labels[i]:
-    #         results.write("WRONG\n")
-    #         wrong += 1
-    #     else:
-    #         results.write("CORRECT\n")
-    #         correct += 1
-    #
-    # res = str(correct) + " CORRECT | " + str(wrong) + " WRONG"
-    # results.write(res)
-
 
     model.save("model/test_model.h5")

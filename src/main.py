@@ -15,12 +15,15 @@ def main(model):
             whichModel = input("Enter an option [GAMELINE, DIFF]: ").lower()
             if whichModel == 'gameline':
                 print("Training gameline model...")
-                ctm.createModel()
+                try:
+                    ctm.createModel()
+                except ValueError:
+                    print("Wrong Inputs")
                 print('Loading model...')
                 model = keras.models.load_model("model/test_model.h5")
             elif whichModel == 'diff':
                 print("Training diff model...")
-                ctm.createDifferentialModel()
+                #ctm.createDifferentialModel()
                 print('Loading model...')
                 model = keras.models.load_model("model/test_model.h5")
             else:
@@ -75,3 +78,4 @@ def main(model):
 if __name__ == '__main__':
     model = keras.models.load_model("model/test_model.h5")
     main(model)
+    print("BYE")

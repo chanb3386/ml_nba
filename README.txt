@@ -6,8 +6,9 @@ This is a neural network created to predict NBA games. It is trained and tested 
 
 
 TODO:
-*k-fold
-
+**clean model train funcs/design funcs
+**test models
 **recency in predictions (selenium): need to find good dataset
 **add player ratings + more inputs
 **plot real rankings vs predicted rankings
+**app front end - create your own model

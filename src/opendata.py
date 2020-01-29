@@ -40,6 +40,3 @@ def listToString(s):
 
     # return string
     return str1
-
-#def getRecentInputs(home,away,inputs):
-#    return
