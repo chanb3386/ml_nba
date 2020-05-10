@@ -6,6 +6,7 @@ This is a neural network created to predict NBA games. It is trained and tested 
 
 
 TODO:
+** TENSORFLOW UPDATE: NEED TO FIX CODE
 **clean model train funcs/design funcs
 **test models
 **recency in predictions (selenium): need to find good dataset
