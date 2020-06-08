@@ -41,6 +41,7 @@ def updateData():
     actions.perform()
 
     stats = driver.find_element_by_xpath('/html/body/div[2]/div[5]/div[4]/div[3]/div/div/pre')
+    print("end 1\nend 1")
     time.sleep(2)
 
     # saving CSV
@@ -67,6 +68,7 @@ def updateData():
     actions.perform()
 
     stats = driver.find_element_by_xpath('/html/body/div[2]/div[5]/div[5]/div[3]/div/div/pre')
+    print("end 1\nend 2")
     time.sleep(2)
 
     # saving CSV
@@ -94,6 +96,8 @@ def updateData():
 
     stats = driver.find_element_by_xpath('/html/body/div[2]/div[5]/div[10]/div[3]/div/div/pre')
     time.sleep(2)
+
+    # ADD PER 100 STATS
 
     # saving CSV
     data = StringIO(stats.text)

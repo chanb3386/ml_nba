@@ -22,7 +22,7 @@ def predictNetwork(model):
         raise NameError('Wrong inputs')
 
     try:
-        type = input("Enter a model [GL, DIFF]: ").lower()
+        type = input("Enter a model [ML, DIFF]: ").lower()
     except:
         print("Wrong Input")
 
@@ -37,7 +37,7 @@ def predictNetwork(model):
 
     predict = model.predict(inputs)
 
-    if type == 'gl':
+    if type == 'ml':
         if home_away.lower() == "home":
             print("%HOME WIN: " + str(predict[0][0]))
             print("%AWAY WIN: " + str(predict[0][1]))

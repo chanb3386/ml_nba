@@ -12,8 +12,8 @@ def main(model):
         a = input("Enter an option [TRAIN, PREDICT, VIEWLOG, RANK, UPDATE, END]: ")
         check = a.lower()
         if check == 'train':
-            whichModel = input("Enter an option [GAMELINE, DIFF]: ").lower()
-            if whichModel == 'gameline':
+            whichModel = input("Enter an option [ML, DIFF]: ").lower()
+            if whichModel == 'ml':
                 print("Training gameline model...")
                 try:
                     ctm.createModel()
@@ -48,7 +48,7 @@ def main(model):
                 else:
                     break
         elif check == 'viewlog':
-            input1 = input("Enter an option: [ALL, TRAIN, TEST, PRED, END]: ").lower()
+            input1 = input("Enter an option: [ALL, TRAIN, TEST, PRED, END, SIM]: ").lower()
             if input1 == "all":
                 csv = vdl.viewAllGames()
                 print(csv)
@@ -60,6 +60,8 @@ def main(model):
                 print(csv)
             elif input1 == "pred":
                 vdl.viewPredData()
+            elif input1 == 'sim':
+                vdl.viewGameSims()
             elif input1 == "end":
                 print("Ending...\n")
             else:

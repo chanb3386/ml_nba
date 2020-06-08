@@ -3,40 +3,6 @@ from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import opendata
-
-TEAM_DICT = {
-             "MIL" : "Milwaukee Bucks",
-             "MIA" : "Miami Heat",
-             "BOS" : "Boston Celtics",
-             "TOR" : "Toronto Raptors",
-             "PHI" : "Philadelphia 76ers",
-             "IND" : "Indiana Pacers",
-             "BRK" : "Brooklyn Nets",
-             "ORL" : "Orlando Magic",
-             "CHO" : "Charlotte Hornets",
-             "CHI" : "Chicago Bulls",
-             "DET" : "Detroit Pistons",
-             "WAS" : "Washington Wizards",
-             "CLE" : "Cleveland Cavaliers",
-             "NYK" : "New York Knicks",
-             "ATL" : "Atlanta Hawks",
-             "LAL" : "Los Angeles Lakers",
-             "DEN" : "Denver Nuggets",
-             "HOU" : "Houston Rockets",
-             "LAC" : "Los Angeles Clippers",
-             "DAL" : "Dallas Mavericks",
-             "UTA" : "Utah Jazz",
-             "OKC" : "Oklahoma City Thunder",
-             "POR" : "Portland Trail Blazers",
-             "SAS" : "San Antonio Spurs",
-             "SAC" : "Sacramento Kings",
-             "PHO" : "Phoenix Suns",
-             "MEM" : "Memphis Grizzlies",
-             "MIN" : "Minnesota Timberwolves",
-             "NOP" : "New Orleans Pelicans",
-             "GSW" : "Golden State Warriors"
-            }
 
 # Script to gather NBA data to train and test a neural network
 # 1a. data-gathering
@@ -164,6 +130,8 @@ def createModel():
     # Creating inputs to Neural Network
 
     # adding team stats and opponent stats to each game for each team
+    # when team A = away team, join on Home/Neutral
+    # otherwise join on Visitor/Neutral
     d5 = games2020.join(data2020,lsuffix="_d3", rsuffix="_d4")
     d6 = d5.join(data2020, on='Home/Neutral', lsuffix="_A",rsuffix="_B")
     d7 = d6.join(dataOppStats2020)
@@ -274,9 +242,9 @@ def createModel():
     print("CREATE YOUR MODEL: ")
 
     hiddenNum = int(input("Enter the number of hidden layers: "))
-    hiddenActivation = input("Enter an activation function for hidden layers: ")
+    hiddenActivation = input("Enter an activation function for hidden layers: ") #tanh
     hiddenSize = int(input("Enter the size of each hidden layer: "))
-    outputActivation = input("Enter the output activation function: ")
+    outputActivation = input("Enter the output activation function: ") #softmax
 
     model = keras.Sequential([
         keras.layers.Input(col_t),
@@ -290,36 +258,14 @@ def createModel():
     optimizer = input("Enter a Keras optimzer: ")
 
     epochs = input('enter epochs: ')
-    model.compile(optimizer=optimizer, loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+    model.compile(optimizer=optimizer, loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=["accuracy"])
     model.fit(train_data, train_labels, epochs=int(epochs))
     model.evaluate(test_data,test_labels)
 
     # how many home wins predicted over test data
-    predict = model.predict(test_data)
-    count = 0
-    for i in range(len(predict)):
-        if(predict[i][0] > .5):
-            count += 1
-    print(count)
+    #predict = model.predict(test_data)
 
-    np.savetxt('data_logs/test_predict.txt', predict)
-
-    # results = open('data_logs/results.txt', "w")
-    #
-    # # writing which games were predicted incorrectly/correctly
-    # wrong = 0
-    # correct = 0
-    # for i in range(len(predict)):
-    #     a = np.argmax(predict[0])
-    #     if a == test_labels[i]:
-    #         results.write("WRONG\n")
-    #         wrong += 1
-    #     else:
-    #         results.write("CORRECT\n")
-    #         correct += 1
-    #
-    # res = str(correct) + " CORRECT | " + str(wrong) + " WRONG"
-    # results.write(res)
+    #np.savetxt('data_logs/test_predict.txt', predict)
 
 
     model.save("model/test_model.h5")

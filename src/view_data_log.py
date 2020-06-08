@@ -31,3 +31,8 @@ def viewPredData():
     preddata = open("data_logs/preds.txt", "r+")
     print(preddata.read())
     return
+
+def viewGameSims():
+    games = open("data_logs/games_sim.txt", "r+")
+    print(games.read())
+    return
