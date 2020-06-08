@@ -6,9 +6,8 @@ This is a neural network created to predict NBA games. It is trained and tested 
 
 
 TODO:
-**clean model train funcs/design funcs
-**test models
-**recency in predictions (selenium): need to find good dataset
-**add player ratings + more inputs
-**plot real rankings vs predicted rankings
-**app front end - create your own model
+** After tf update: no loss, need to reorganize model/data
+** add graphical analysis of network (plot real rankings vs predicted rankings)
+** fix selenium (update func)
+** add more inputs (recency, player ratings)
+** front-end/back-end
